@@ -1,9 +1,9 @@
 //
-//  WSLRollView.h
-//  WSL_RollView
+//  ZYRollView.h
+//  ZYRollView
 //
-//  Created by 王双龙 on 2018/9/8.
-//  Copyright © 2018年 https://www.jianshu.com/u/e15d1f644bea. All rights reserved.
+//  Created by XUZY
+//  Copyright © https://github.com/xuzeyu/ZYRollView.git. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,54 +11,54 @@
 /**
  默认cell样式 WSLItemID
  */
-@interface WSLRollViewCell : UICollectionViewCell
+@interface ZYRollViewCell : UICollectionViewCell
 @end
 
-@class WSLRollView;
+@class ZYRollView;
 
 //代理协议
-@protocol WSLRollViewDelegate <NSObject>
+@protocol ZYRollViewDelegate <NSObject>
 @optional
 /**
  返回itemSize 默认值是CGSizeMake(self.frame.size.width, self.frame.size.height);
  */
-- (CGSize)rollView:(WSLRollView *)rollView sizeForItemAtIndex:(NSInteger)index;
+- (CGSize)rollView:(ZYRollView *_Nonnull)rollView sizeForItemAtIndex:(NSInteger)index;
 /**
  item的间隔 默认值0
  */
-- (CGFloat)spaceOfItemInRollView:(WSLRollView *)rollView;
+- (CGFloat)spaceOfItemInRollView:(ZYRollView *_Nonnull)rollView;
 /**
  内边距 上 左 下 右 默认值UIEdgeInsetsMake(0, 0, 0, 0)
  */
-- (UIEdgeInsets)paddingOfRollView:(WSLRollView *)rollView;
+- (UIEdgeInsets)paddingOfRollView:(ZYRollView *_Nonnull)rollView;
 /**
  点击事件
  */
-- (void)rollView:(WSLRollView *)rollView didSelectItemAtIndex:(NSInteger)index;
+- (void)rollView:(ZYRollView *_Nonnull)rollView didSelectItemAtIndex:(NSInteger)index;
 /**
  翻页完成的回调 只针对于分页效果
  */
-- (void)rollView:(WSLRollView *)rollView didRollItemToIndex:(NSInteger)currentIndex;
+- (void)rollView:(ZYRollView *_Nonnull)rollView didRollItemToIndex:(NSInteger)currentIndex;
 /**
  自定义item样式
  */
-- (WSLRollViewCell *)rollView:(WSLRollView *)rollView cellForItemAtIndex:(NSInteger )index;
+- (ZYRollViewCell *_Nonnull)rollView:(ZYRollView *_Nonnull)rollView cellForItemAtIndex:(NSInteger )index;
 @end
 
 /**
  滚动样式
  */
-typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
-    WSLRollViewScrollStylePage = 0, /** 分页 必须等宽或高*/
-    WSLRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/
+typedef NS_ENUM(NSInteger, ZYRollViewScrollStyle) {
+    ZYRollViewScrollStylePage = 0, /** 分页 必须等宽或高*/
+    ZYRollViewScrollStyleStep   /** 渐进 可以不等宽或高*/
 };
 
-@interface WSLRollView : UIView
+@interface ZYRollView : UIView
 
 /**
  原始数据源
  */
-@property (nonatomic, strong) NSMutableArray * sourceArray;
+@property (nonatomic, strong, nullable) NSMutableArray * sourceArray;
 
 /**
  是否循环轮播 默认YES 如果NO，则自动禁止计时器
@@ -73,9 +73,9 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
  */
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;
 /**
- 轮播样式 默认是 WSLRollViewScrollStylePage 分页
+ 轮播样式 默认是 ZYRollViewScrollStylePage 分页
  */
-@property (nonatomic, assign) WSLRollViewScrollStyle scrollStyle;
+@property (nonatomic, assign) ZYRollViewScrollStyle scrollStyle;
 /**
  设置初始化时的位置页码，默认为0 只对分页效果有效
  */
@@ -101,27 +101,27 @@ typedef NS_ENUM(NSInteger, WSLRollViewScrollStyle) {
 @property (nonatomic, assign) UIEdgeInsets padding;
 
 /** delegate*/
-@property (nonatomic, weak) id<WSLRollViewDelegate> delegate;
+@property (nonatomic, weak) id<ZYRollViewDelegate> _Nullable delegate;
 
 /**
  初始化方法 direction 滚动方向
  */
-- (instancetype)initWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection)direction;
+- (instancetype _Nonnull )initWithFrame:(CGRect)frame scrollDirection:(UICollectionViewScrollDirection)direction;
 
 /**
  注册item样式 用法和UICollectionView相似
  */
-- (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *_Nonnull)identifier;
 /**
  注册item样式 用法和UICollectionView相似
  */
-- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *_Nonnull)identifier;
 /**
- 用于初始化WSLRollViewCell，自定义cell样式 用法和UICollectionView相似
+ 用于初始化ZYRollViewCell，自定义cell样式 用法和UICollectionView相似
  */
-- (WSLRollViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index;
+- (ZYRollViewCell *_Nullable)dequeueReusableCellWithReuseIdentifier:(NSString *_Nonnull)identifier forIndex:(NSInteger)index;
 //返回索引为index的cell
-- (WSLRollViewCell *)cellForItemAtIndexPath:(NSInteger)index;
+- (ZYRollViewCell *_Nullable)cellForItemAtIndexPath:(NSInteger)index;
 
 /**
  刷新数据源
